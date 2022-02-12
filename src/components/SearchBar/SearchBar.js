@@ -35,7 +35,7 @@ class SearchBar extends React.Component {
   // Lets API know which sort option has been selected
   handleSortByChange(sortByOption) {
     this.setState({
-      sortBy: sortByOption,
+      sortBy: sortByOption
     });
   }
 
