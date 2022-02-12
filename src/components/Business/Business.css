@@ -22,6 +22,15 @@
   justify-content: space-between;
 }
 
+.Business-information a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.Business-information a:hover {
+  color: #9e6c07;
+}
+
 .Business-information p {
   font-size: 0.88rem;
   font-weight: 300;

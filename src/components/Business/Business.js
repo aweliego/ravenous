@@ -14,13 +14,18 @@ class Business extends React.Component {
         </div>
         <h2>{this.props.business.name}</h2>
         <div className="Business-information">
-          <div className="Business-address">
-            <p>{this.props.business.address}</p>
-            <p>{this.props.business.city}</p>
-            <p>
-              {`${this.props.business.state} ${this.props.business.zipCode}`}
-            </p>
-          </div>
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${this.props.business.latitude}%2C${this.props.business.longitude}`}
+            target="_blank"
+          >
+            <div className="Business-address">
+              <p>{this.props.business.address}</p>
+              <p>{this.props.business.city}</p>
+              <p>
+                {`${this.props.business.state} ${this.props.business.zipCode}`}
+              </p>
+            </div>
+          </a>
           <div className="Business-reviews">
             <h3>{this.props.business.category.toUpperCase()}</h3>
             <h3 className="rating">{`${this.props.business.rating} stars`}</h3>
