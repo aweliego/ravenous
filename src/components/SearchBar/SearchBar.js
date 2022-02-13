@@ -16,6 +16,7 @@ class SearchBar extends React.Component {
     this.handleTermChange = this.handleTermChange.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleAutocomplete = this.handleAutocomplete.bind(this);
 
     this.sortByOptions = {
       'Best Match': 'best_match',
@@ -53,6 +54,10 @@ class SearchBar extends React.Component {
     });
   }
 
+  handleAutocomplete(e) {
+    this.props.autocomplete(e.target.value);
+  }
+
   // Let's Go button functionality
   handleSearch(e) {
     this.props.searchYelp(
@@ -88,6 +93,7 @@ class SearchBar extends React.Component {
           <div className="SearchBar-fields">
             <input
               onChange={this.handleTermChange}
+              onChange={this.handleAutocomplete}
               placeholder="Search Businesses"
             />
             <input onChange={this.handleLocationChange} placeholder="Where?" />
@@ -100,5 +106,3 @@ class SearchBar extends React.Component {
 }
 
 export default SearchBar;
-
-// The purpose of renderSortByOptions() is to dynamically create the list items needed to display the sort options (Best Match, Highest Rated, Most Reviewed). This is to help future proof against potential changes to the Yelp API.
