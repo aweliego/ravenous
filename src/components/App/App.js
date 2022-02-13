@@ -9,6 +9,7 @@ class App extends React.Component {
     super(props);
     this.state = { businesses: [] };
     this.searchYelp = this.searchYelp.bind(this);
+    this.getCoordinates = this.getCoordinates.bind(this);
     this.autocomplete = this.autocomplete.bind(this);
   }
   // Let's Go button functionality
@@ -19,8 +20,12 @@ class App extends React.Component {
     });
   }
 
-  autocomplete(text) {
-    Yelp.autocomplete(text);
+  getCoordinates(location) {
+    Yelp.getCoordinates(location);
+  }
+
+  autocomplete(text, location) {
+    Yelp.autocomplete(text, location);
   }
 
   render() {
@@ -30,6 +35,7 @@ class App extends React.Component {
         <SearchBar
           searchYelp={this.searchYelp}
           autocomplete={this.autocomplete}
+          getCoordinates={this.getCoordinates}
         />
         <BusinessList businesses={this.state.businesses} />
       </div>

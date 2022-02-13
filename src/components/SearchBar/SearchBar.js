@@ -16,6 +16,7 @@ class SearchBar extends React.Component {
     this.handleTermChange = this.handleTermChange.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.getCoordinates = this.getCoordinates.bind(this);
     this.handleAutocomplete = this.handleAutocomplete.bind(this);
 
     this.sortByOptions = {
@@ -55,7 +56,11 @@ class SearchBar extends React.Component {
   }
 
   handleAutocomplete(e) {
-    this.props.autocomplete(e.target.value);
+    this.props.autocomplete(e.target.value, this.state.location);
+  }
+
+  getCoordinates() {
+    this.props.getCoordinates(this.state.location);
   }
 
   // Let's Go button functionality
@@ -93,6 +98,7 @@ class SearchBar extends React.Component {
           <div className="SearchBar-fields">
             <input
               onChange={this.handleTermChange}
+              onChange={this.getCoordinates}
               onChange={this.handleAutocomplete}
               placeholder="Search Businesses"
             />

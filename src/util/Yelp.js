@@ -33,10 +33,32 @@ const Yelp = {
     }
   },
 
-  // Autocomplete category or keyword
-  async autocomplete(text) {
+  async getCoordinates(location) {
     const response = await fetch(
-      `https://corsanywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=${text}`,
+      `https://corsanywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${location}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      }
+    );
+    const jsonResponse = await response.json();
+    return jsonResponse.businesses.map((business) => {
+      if (jsonResponse.businesses) {
+        return {
+          latitude: business.coordinates.latitude,
+          longitude: business.coordinates.longitude,
+        };
+      }
+    });
+  },
+
+  // Autocomplete keyword or business name
+  async autocomplete(text, location) {
+    const response = await fetch(
+      `https://corsanywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=${text}&latitude=${
+        this.getCoordinates(location).latitude
+      }&longitude=${this.getCoordinates(location).longitude}`,
       {
         headers: {
           Authorization: `Bearer ${apiKey}`,
