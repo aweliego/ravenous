@@ -37,6 +37,11 @@
   color: #f0c36c;
 }
 
+.SearchBar-form {
+  display: flex;
+  flex-direction: column;
+}
+
 .SearchBar-fields {
   display: flex;
   justify-content: center;
@@ -58,19 +63,21 @@
 }
 
 .SearchBar-submit {
-  text-align: center;
-}
-
-.SearchBar-submit a {
+  max-width: 150px;
+  margin: 0 auto;
   border-radius: 4px;
   padding: 0.72rem 1.7rem;
   background-color: #cca353;
   color: #ffffff;
+  border: 0;
   font-weight: 600;
+  font-family: inherit;
+  font-size: inherit;
+  text-align: center;
   transition: background-color 0.5s;
 }
 
-.SearchBar-submit a:hover {
+.SearchBar-submit:hover {
   cursor: pointer;
   background-color: #a7874b;
 }
