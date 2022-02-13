@@ -12,9 +12,10 @@ class App extends React.Component {
   }
   // Let's Go button functionality
   searchYelp(term, location, sortBy) {
-    Yelp.search(term, location, sortBy).then(businesses => {
-      this.setState({ businesses: businesses })
-    })
+    Yelp.search(term, location, sortBy).then((businesses) => {
+      this.setState({ businesses: businesses });
+      console.log(this.state.businesses[0]);
+    });
   }
 
   render() {
