@@ -35,7 +35,7 @@ class SearchBar extends React.Component {
   // Lets API know which sort option has been selected
   handleSortByChange(sortByOption) {
     this.setState({
-      sortBy: sortByOption
+      sortBy: sortByOption,
     });
   }
 
@@ -84,16 +84,16 @@ class SearchBar extends React.Component {
         <div className="SearchBar-sort-options">
           <ul>{this.renderSortByOptions()}</ul>
         </div>
-        <div className="SearchBar-fields">
-          <input
-            onChange={this.handleTermChange}
-            placeholder="Search Businesses"
-          />
-          <input onChange={this.handleLocationChange} placeholder="Where?" />
-        </div>
-        <div onClick={this.handleSearch} className="SearchBar-submit">
-          <a>Let's Go</a>
-        </div>
+        <form onSubmit={this.handleSearch} className="SearchBar-form">
+          <div className="SearchBar-fields">
+            <input
+              onChange={this.handleTermChange}
+              placeholder="Search Businesses"
+            />
+            <input onChange={this.handleLocationChange} placeholder="Where?" />
+          </div>
+          <input type="submit" value="Let's Go" className="SearchBar-submit" />
+        </form>
       </div>
     );
   }
