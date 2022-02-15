@@ -89,13 +89,14 @@ class SearchBar extends React.Component {
         <div className="SearchBar-sort-options">
           <ul>{this.renderSortByOptions()}</ul>
         </div>
-        <form onSubmit={this.handleSearch} className="SearchBar-form">
+        <form autoComplete="off" onSubmit={this.handleSearch} className="SearchBar-form">
           <div className="SearchBar-fields">
             <input
               onChange={this.handleTermChange}
               onChange={this.handleAutocomplete}
               placeholder="Search Businesses"
             />
+            <div id="suggestions"></div>
             <input onChange={this.handleLocationChange} placeholder="Where?" />
           </div>
           <input type="submit" value="Let's Go" className="SearchBar-submit" />

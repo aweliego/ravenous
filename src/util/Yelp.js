@@ -44,7 +44,16 @@ const Yelp = {
       }
     );
     const jsonResponse = await response.json();
-    console.log(jsonResponse);
+
+    if (text == '') {
+      return; // to avoid TypeError, but will still throw Bad request when user deletes input
+    }
+    if (text.length >= 3) {
+      const suggestions = [...jsonResponse.categories, ...jsonResponse.terms];
+      // console.log(suggestions);
+      // console.log(suggestions.map((el) => el.title || el.text));
+      return suggestions.map((el) => el.title || el.text);
+    }
   },
 };
 
