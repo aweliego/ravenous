@@ -33,10 +33,17 @@ class SearchBar extends React.Component {
   }
 
   // Lets API know which sort option has been selected
-  handleSortByChange(sortByOption) {
-    this.setState({
-      sortBy: sortByOption,
-    });
+  handleSortByChange(sortByOption, e) {
+    this.setState(
+      {
+        sortBy: sortByOption,
+      },
+      () => {
+        if (this.state.term && this.state.location) {
+          this.handleSearch(e);
+        }
+      }
+    );
   }
 
   // Sets the typed input as the search term
