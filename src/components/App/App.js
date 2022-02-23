@@ -9,7 +9,7 @@ class App extends React.Component {
     super(props);
     this.state = { businesses: [] };
     this.searchYelp = this.searchYelp.bind(this);
-    this.autocomplete = this.autocomplete.bind(this);
+    //this.autocomplete = this.autocomplete.bind(this);
   }
   // Let's Go button functionality
   searchYelp(term, location, sortBy) {
@@ -19,9 +19,14 @@ class App extends React.Component {
     });
   }
 
-  autocomplete(text) {
-    Yelp.autocomplete(text);
-  }
+  // autocomplete(text) {
+  //   Yelp.autocomplete(text).then((suggestions) => {
+  //     console.log('suggestions: ' + suggestions); // works fine, is an array
+  //     // suggestions.forEach((suggestion) => {
+  //     //   console.log(suggestion); // undefined
+  //     // });#
+  //   });
+  // }
 
   render() {
     return (
@@ -29,7 +34,7 @@ class App extends React.Component {
         <h1>ravenous</h1>
         <SearchBar
           searchYelp={this.searchYelp}
-          autocomplete={this.autocomplete}
+          //autocomplete={this.autocomplete}
         />
         <BusinessList businesses={this.state.businesses} />
       </div>

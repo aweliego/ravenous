@@ -1,5 +1,7 @@
 import React from 'react';
 import './SearchBar.css';
+import Yelp from '../../util/Yelp';
+import SuggestionsList from '../SuggestionsList/SuggestionsList';
 
 // The search bar will communicate with the Yelp API
 // Requests to the Yelp API must follow formatting and naming conventions set by the API.
@@ -11,12 +13,14 @@ class SearchBar extends React.Component {
       term: '',
       location: '',
       sortBy: 'best_match',
+      suggestions: [],
     };
 
     this.handleTermChange = this.handleTermChange.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    this.handleAutocomplete = this.handleAutocomplete.bind(this);
+    //this.handleAutocomplete = this.handleAutocomplete.bind(this);
+    this.autocomplete = this.autocomplete.bind(this);
 
     this.sortByOptions = {
       'Best Match': 'best_match',
@@ -54,8 +58,15 @@ class SearchBar extends React.Component {
     });
   }
 
-  handleAutocomplete(e) {
-    this.props.autocomplete(e.target.value);
+  // handleAutocomplete(e) {
+  //   this.props.autocomplete(e.target.value);
+  // }
+
+  autocomplete(e) {
+    Yelp.autocomplete(e.target.value).then((suggestions) => {
+      console.log('suggestions: ' + suggestions); // undefined
+      this.setState({ suggestions: suggestions });
+    });
   }
 
   // Let's Go button functionality
@@ -89,14 +100,18 @@ class SearchBar extends React.Component {
         <div className="SearchBar-sort-options">
           <ul>{this.renderSortByOptions()}</ul>
         </div>
-        <form autoComplete="off" onSubmit={this.handleSearch} className="SearchBar-form">
+        <form
+          autoComplete="off"
+          onSubmit={this.handleSearch}
+          className="SearchBar-form"
+        >
           <div className="SearchBar-fields">
             <input
               onChange={this.handleTermChange}
-              onChange={this.handleAutocomplete}
+              onChange={this.autocomplete}
               placeholder="Search Businesses"
             />
-            <div id="suggestions"></div>
+            <SuggestionsList suggestions={this.state.suggestions} />
             <input onChange={this.handleLocationChange} placeholder="Where?" />
           </div>
           <input type="submit" value="Let's Go" className="SearchBar-submit" />
